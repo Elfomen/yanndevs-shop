@@ -1,0 +1,40 @@
+# Sending http requiest using the http package
+\
+here we are using the rest api
+
+symfony api platform is what we are going to use to construct our api
+
+
+# Some modificatios to the http package
+
+Using the Http Package
+
+The http package we added in the last lecture changed slightly with its last versions.
+
+In the next lecture, we'll send a POST request to an API endpoint with a URL.
+
+For this, in the lecture, I'll do this:
+
+    const url = '...'
+    http.post(url, ...)
+
+As of version 0.13.0 or higher of the http package, url can't be a string (i.e. plain text) anymore.
+
+You have two options:
+
+1) Use an older version of the http package: E.g. set http: 0.12.2 in your pubspec.yaml file
+
+2) Convert url from a string to a "Url object" (and also change const to final):
+
+    final url = Uri.parse('<your-url>')
+    http.post(url, ...)
+
+For example, my code from the next lecture should look like this:
+
+    final url = Uri.parse('https://flutter-update.firebaseio.com/products.json')
+    http.post(url, ...)
+
+Alternatively, you can also use this syntax:
+
+    final url = Uri.https('flutter-update.firebaseio.com', '/products.json')
+    http.post(url, ...)
